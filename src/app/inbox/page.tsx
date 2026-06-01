@@ -7,9 +7,9 @@ import { formatTime } from "@/lib/api";
 import { useIdentity } from "@/lib/identity";
 
 const URGENCY_STYLES: Record<Urgency, string> = {
-  high: "bg-error-container text-on-error-container border-error",
-  normal: "bg-surface-variant text-on-surface-variant border-outline",
-  low: "bg-surface-container-low text-on-surface-variant border-outline-variant",
+  high: "bg-error text-on-error rounded-full",
+  normal: "bg-surface-container text-on-surface-variant border border-outline-variant rounded-full",
+  low: "bg-surface-container-low text-on-surface-variant border border-outline-variant rounded-full",
 };
 
 export default function InboxPage() {
@@ -79,16 +79,22 @@ export default function InboxPage() {
   return (
     <main className="flex-grow px-container-margin md:px-8 max-w-5xl mx-auto w-full pt-4 md:pt-8">
       <header className="mb-stack-md flex items-center justify-between">
-        <h1 className="font-display text-display uppercase tracking-tight text-primary">
+        <h1 className="font-display text-display uppercase tracking-tight text-on-surface">
           📟 INBOX
         </h1>
-        <span className="font-code-sm text-code-sm text-outline px-2 py-1 bg-surface-container-low border border-outline-variant">
+        <span
+          className={`font-code-sm text-code-sm px-3 py-1 rounded-full ${
+            !loading && beeps.length > 0
+              ? "bg-primary-container text-on-primary-container"
+              : "bg-surface-container text-on-surface-variant border border-outline-variant"
+          }`}
+        >
           {loading ? "…" : `${beeps.length} TASKS`}
         </span>
       </header>
 
       {fetchError && (
-        <div className="mb-stack-sm font-code-sm text-code-sm text-error border border-error px-stack-sm py-2">
+        <div className="mb-stack-sm font-code-sm text-code-sm text-error border border-error px-stack-sm py-2 rounded-md bg-error-container">
           {fetchError}
         </div>
       )}
@@ -102,24 +108,33 @@ export default function InboxPage() {
           NO OPEN BEEPS
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter md:gap-stack-md">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           {beeps.map((beep) => (
-            <div key={beep.id} className="flex flex-col gap-0">
-              <article className="border border-outline-variant bg-surface-container-lowest p-stack-sm flex flex-col gap-stack-xs hover:bg-surface-bright">
+            <div key={beep.id} className="flex flex-col">
+              <article
+                className="border border-outline-variant bg-surface-container-lowest p-stack-sm flex flex-col gap-stack-xs rounded-md hover:border-primary/40 transition-all duration-150 ease-out"
+                style={{ boxShadow: "var(--shadow-sm)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-sm)";
+                }}
+              >
                 <div className="flex justify-between items-start w-full">
-                  <div className="font-code-md text-code-md font-bold text-primary uppercase">
+                  <div className="font-code-md text-code-md font-bold text-on-surface uppercase">
                     FROM: {beep.from}
                   </div>
                   <div className="font-code-sm text-code-sm text-on-surface-variant">
                     {formatTime(beep.created_at)}
                   </div>
                 </div>
-                <div className="bg-surface-container-low border border-outline-variant p-stack-sm font-code-sm text-code-sm text-on-surface line-clamp-2 min-h-10 w-full">
+                <div className="bg-surface-container-low border border-outline-variant p-stack-sm rounded-md font-code-sm text-code-sm text-on-surface line-clamp-2 min-h-10 w-full">
                   {beep.task}
                 </div>
                 <div className="mt-unit flex items-center justify-between">
                   <div
-                    className={`font-label-caps text-label-caps px-2 py-0.5 border-l-2 ${URGENCY_STYLES[beep.urgency]}`}
+                    className={`font-label-caps text-label-caps px-2 py-0.5 ${URGENCY_STYLES[beep.urgency]}`}
                   >
                     {beep.urgency.toUpperCase()}
                   </div>
@@ -143,13 +158,14 @@ export default function InboxPage() {
                 <div className="flex gap-2 mt-unit">
                   <button
                     onClick={() => openAction(beep.id, "reply")}
-                    className="font-label-caps text-label-caps px-3 py-1 border border-primary text-primary hover:bg-primary hover:text-on-primary"
+                    className="font-label-caps text-label-caps px-3 py-1.5 bg-primary text-on-primary rounded-md hover:bg-on-primary-fixed-variant transition-colors duration-150 ease-out"
+                    style={{ boxShadow: "var(--shadow-sm)" }}
                   >
                     REPLY
                   </button>
                   <button
                     onClick={() => openAction(beep.id, "decline")}
-                    className="font-label-caps text-label-caps px-3 py-1 border border-error text-error hover:bg-error-container"
+                    className="font-label-caps text-label-caps px-3 py-1.5 border border-outline-variant text-on-surface-variant rounded-md hover:bg-surface-container transition-colors duration-150 ease-out"
                   >
                     DECLINE
                   </button>
@@ -157,14 +173,16 @@ export default function InboxPage() {
               </article>
 
               {actingOn === beep.id && action && (
-                <div className="border border-t-0 border-outline-variant bg-surface-container-low p-stack-sm flex flex-col gap-stack-xs">
+                <div
+                  className="border border-t-0 border-outline-variant bg-surface-container-low p-stack-sm flex flex-col gap-stack-xs rounded-b-md"
+                >
                   <span className="font-label-caps text-label-caps text-secondary">
                     {action === "reply" ? "REPLY" : "DECLINE REASON"}
                   </span>
                   <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    className="brutalist-input w-full border border-outline bg-surface-container-lowest p-2 font-code-sm text-code-sm text-on-surface resize-none leading-relaxed min-h-[80px]"
+                    className="brutalist-input w-full border border-outline bg-surface-container-lowest p-2 font-code-sm text-code-sm text-on-surface resize-none leading-relaxed min-h-[80px] rounded-md"
                     placeholder={action === "reply" ? "Enter your reply…" : "Enter reason for declining…"}
                   />
                   {submitError && (
@@ -174,13 +192,13 @@ export default function InboxPage() {
                     <button
                       onClick={() => submitAction(beep)}
                       disabled={!text.trim() || submitting}
-                      className="font-label-caps text-label-caps px-3 py-1 bg-primary text-on-primary disabled:opacity-40"
+                      className="font-label-caps text-label-caps px-3 py-1.5 bg-primary text-on-primary rounded-md disabled:opacity-40 hover:bg-on-primary-fixed-variant transition-colors duration-150 ease-out"
                     >
                       {submitting ? "SENDING…" : "SEND"}
                     </button>
                     <button
                       onClick={cancelAction}
-                      className="font-label-caps text-label-caps px-3 py-1 border border-outline-variant text-on-surface-variant hover:bg-surface-container"
+                      className="font-label-caps text-label-caps px-3 py-1.5 border border-outline-variant text-on-surface-variant rounded-md hover:bg-surface-container transition-colors duration-150 ease-out"
                     >
                       CANCEL
                     </button>
@@ -195,7 +213,8 @@ export default function InboxPage() {
       <Link
         href="/compose"
         aria-label="New beep"
-        className="fixed bottom-16 md:bottom-8 right-container-margin w-12 h-12 bg-primary text-on-primary flex items-center justify-center border border-primary hover:bg-inverse-surface z-40"
+        className="fixed bottom-16 md:bottom-8 right-container-margin w-12 h-12 bg-primary text-on-primary flex items-center justify-center rounded-full hover:bg-on-primary-fixed-variant z-40 transition-colors duration-150 ease-out"
+        style={{ boxShadow: "var(--shadow-md)" }}
       >
         <span className="material-symbols-outlined text-2xl" aria-hidden>
           add

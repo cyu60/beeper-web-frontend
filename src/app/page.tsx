@@ -9,8 +9,8 @@ const TILES = [
 export default function HomePage() {
   return (
     <main className="flex-grow flex flex-col justify-center px-container-margin w-full max-w-lg mx-auto">
-      <div className="flex flex-col gap-stack-md mb-8">
-        <h1 className="font-display text-display text-primary uppercase tracking-tight leading-none w-3/4">
+      <div className="flex flex-col gap-stack-md mb-10">
+        <h1 className="font-display text-display text-on-surface uppercase tracking-tight leading-none w-3/4" style={{ fontSize: "30px", lineHeight: "1.1" }}>
           Async Claude delegation.
         </h1>
         <p className="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
@@ -19,26 +19,30 @@ export default function HomePage() {
         </p>
         <Link
           href="/inbox"
-          className="self-start bg-primary text-on-primary font-label-caps text-label-caps px-4 py-2 border border-primary hover:bg-on-surface-variant focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-lowest"
+          className="self-start bg-primary text-on-primary font-label-caps text-label-caps px-6 py-2.5 rounded-md hover:bg-on-primary-fixed-variant focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-lowest transition-colors duration-150 ease-out"
+          style={{ boxShadow: "var(--shadow-md)" }}
         >
           ENTER
         </Link>
       </div>
 
-      <div className="grid grid-cols-3 gap-unit w-full">
+      <div className="grid grid-cols-3 gap-3 w-full">
         {TILES.map((t) => (
           <Link
             key={t.href}
             href={t.href}
-            className="border border-outline-variant bg-surface-container-lowest p-stack-sm flex flex-col items-start justify-center gap-unit hover:bg-surface-container-low cursor-pointer"
+            className="group border border-outline-variant bg-surface-container-lowest p-stack-sm flex flex-col items-start justify-center gap-2 rounded-md hover:border-primary/30 transition-all duration-150 ease-out cursor-pointer"
+            style={{
+              boxShadow: "var(--shadow-sm)",
+            }}
           >
             <span
-              className="material-symbols-outlined text-on-surface-variant text-[18px]"
+              className="material-symbols-outlined text-on-surface-variant text-[18px] group-hover:text-primary group-hover:scale-110 transition-all duration-150 ease-out"
               aria-hidden
             >
               {t.icon}
             </span>
-            <span className="font-label-caps text-label-caps text-primary">
+            <span className="font-label-caps text-label-caps text-on-surface-variant group-hover:text-on-surface transition-colors duration-150 ease-out">
               {t.label}
             </span>
           </Link>

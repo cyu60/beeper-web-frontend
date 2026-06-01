@@ -6,7 +6,9 @@ import { useIdentity } from "@/lib/identity";
 
 export default function AccessPage() {
   const [me] = useIdentity();
-  const [edges, setEdges] = useState<{ owner: string; sender: string; added_at: string }[]>([]);
+  const [edges, setEdges] = useState<
+    { owner: string; sender: string; added_at: string }[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
 
@@ -14,9 +16,10 @@ export default function AccessPage() {
     if (!me) return;
     setLoading(true);
     setFetchError(null);
-    api.allowlist(me)
-      .then(data => setEdges(data))
-      .catch(e => setFetchError((e as Error).message))
+    api
+      .allowlist(me)
+      .then((data) => setEdges(data))
+      .catch((e) => setFetchError((e as Error).message))
       .finally(() => setLoading(false));
   }, [me]);
 
@@ -25,21 +28,21 @@ export default function AccessPage() {
   return (
     <main className="flex-grow px-container-margin max-w-3xl mx-auto w-full pt-4 md:pt-8">
       <header className="mb-stack-md flex items-center justify-between border-b border-outline-variant pb-4">
-        <h1 className="font-display text-display tracking-tight text-primary">
+        <h1 className="font-display text-display tracking-tight text-on-surface">
           🔑 ACCESS
         </h1>
-        <span className="font-code-sm text-code-sm text-on-surface-variant">
+        <span className="font-code-sm text-code-sm text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant">
           allowlist
         </span>
       </header>
 
       <section className="mb-8">
-        <h2 className="font-label-caps text-label-caps text-secondary mb-stack-sm">
+        <h2 className="font-label-caps text-label-caps text-on-surface-variant mb-stack-sm">
           ALLOWLIST — WHO CAN BEEP YOU
         </h2>
 
         {fetchError && (
-          <div className="mb-stack-sm font-code-sm text-code-sm text-error border border-error px-stack-sm py-2">
+          <div className="mb-stack-sm font-code-sm text-code-sm text-error border border-error px-stack-sm py-2 rounded-md bg-error-container">
             {fetchError}
           </div>
         )}
@@ -53,22 +56,29 @@ export default function AccessPage() {
             NO ALLOWLIST ENTRIES
           </div>
         ) : (
-          <div className="border border-outline-variant">
-            <div className="grid grid-cols-[1fr_auto] gap-stack-sm px-stack-sm py-2 bg-surface-container-low border-b border-outline-variant">
-              <span className="font-label-caps text-label-caps text-on-surface-variant">
+          <div
+            className="border border-outline-variant rounded-md overflow-hidden"
+            style={{ boxShadow: "var(--shadow-sm)" }}
+          >
+            <div className="grid grid-cols-[1fr_auto] gap-stack-sm px-stack-sm py-2 bg-surface-container border-b border-outline-variant">
+              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">
                 SENDER
               </span>
-              <span className="font-label-caps text-label-caps text-on-surface-variant">
+              <span className="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">
                 SINCE
               </span>
             </div>
-            {edges.map((edge) => (
+            {edges.map((edge, idx) => (
               <div
                 key={edge.sender}
-                className="grid grid-cols-[1fr_auto] gap-stack-sm px-stack-sm py-2 border-b border-outline-variant last:border-b-0 font-data-value text-data-value text-on-surface"
+                className={`grid grid-cols-[1fr_auto] gap-stack-sm px-stack-sm py-2 border-b border-outline-variant last:border-b-0 font-data-value text-data-value text-on-surface ${
+                  idx % 2 === 1 ? "bg-surface-container-low" : "bg-surface-container-lowest"
+                }`}
               >
-                <span className="uppercase">{edge.sender}</span>
-                <span className="text-on-surface-variant">{formatTime(edge.added_at)}</span>
+                <span className="uppercase font-semibold">{edge.sender}</span>
+                <span className="text-on-surface-variant font-code-sm text-code-sm">
+                  {formatTime(edge.added_at)}
+                </span>
               </div>
             ))}
           </div>

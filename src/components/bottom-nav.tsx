@@ -24,8 +24,8 @@ export function BottomNav() {
             href={item.href}
             className={
               active
-                ? "flex flex-col items-center justify-center bg-surface-container text-primary px-2 py-1 w-full h-full"
-                : "flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-full h-full hover:bg-surface-container-low"
+                ? "flex flex-col items-center justify-center text-primary px-2 py-1 w-full h-full transition-colors duration-150 ease-out"
+                : "flex flex-col items-center justify-center text-on-surface-variant px-2 py-1 w-full h-full hover:bg-surface-container transition-colors duration-150 ease-out"
             }
           >
             <span
@@ -41,6 +41,12 @@ export function BottomNav() {
             <span className="font-label-caps text-label-caps mt-0.5">
               {item.label}
             </span>
+            {active && (
+              <span
+                className="absolute bottom-0 w-8 h-0.5 bg-primary rounded-full"
+                style={{ borderRadius: "var(--radius-pill)" }}
+              />
+            )}
           </Link>
         );
       })}

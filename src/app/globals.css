@@ -1,72 +1,83 @@
 @import "tailwindcss";
 
 /*
-  Beeper v2 palette — pulled from the 📟 emoji:
-  - body:    matte black/charcoal plastic
-  - screen:  bright LCD green
-  - antenna: red LED
-  Brutalist square corners stay.
+  Beeper v2 palette (user-specified):
+    #FFFFFF  white       — surface / background
+    #07C04E  LCD green   — primary brand + actions
+    #424343  dark gray   — body text
+    #464646  mid gray    — outline, secondary text
+    #C8201C  restrained red — high urgency, declined, errors
 */
 
 @theme {
-  /* Surface — the pager body */
-  --color-surface-bright: #0a1410;
-  --color-surface: #050807;
-  --color-surface-dim: #020403;
-  --color-surface-container-lowest: #000000;
-  --color-surface-container-low: #050a07;
-  --color-surface-container: #0a140e;
-  --color-surface-container-high: #101a13;
-  --color-surface-container-highest: #15211a;
-  --color-surface-variant: #0a140e;
-  --color-on-surface: #4ade80;
-  --color-on-surface-variant: #16a34a;
-  --color-background: #000000;
-  --color-on-background: #4ade80;
+  /* Surface — white */
+  --color-surface-bright: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-dim: #f5f5f5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #fafafa;
+  --color-surface-container: #f5f5f5;
+  --color-surface-container-high: #ededed;
+  --color-surface-container-highest: #e5e5e5;
+  --color-surface-variant: #f5f5f5;
+  --color-on-surface: #424343;
+  --color-on-surface-variant: #464646;
+  --color-background: #ffffff;
+  --color-on-background: #424343;
 
   /* Primary — LCD green */
-  --color-primary: #22ff88;
-  --color-on-primary: #000000;
-  --color-primary-container: #06351c;
-  --color-on-primary-container: #4ade80;
-  --color-primary-fixed: #06351c;
-  --color-primary-fixed-dim: #0a4a28;
-  --color-on-primary-fixed: #22ff88;
-  --color-on-primary-fixed-variant: #4ade80;
-  --color-inverse-primary: #06351c;
-  --color-inverse-surface: #22ff88;
-  --color-inverse-on-surface: #000000;
-  --color-surface-tint: #16a34a;
+  --color-primary: #07c04e;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #d6f7e3;
+  --color-on-primary-container: #024d20;
+  --color-primary-fixed: #d6f7e3;
+  --color-primary-fixed-dim: #aeefc3;
+  --color-on-primary-fixed: #024d20;
+  --color-on-primary-fixed-variant: #057238;
+  --color-inverse-primary: #aeefc3;
+  --color-inverse-surface: #424343;
+  --color-inverse-on-surface: #ffffff;
+  --color-surface-tint: #07c04e;
 
-  /* Secondary — dim green */
-  --color-secondary: #4ade80;
-  --color-on-secondary: #000000;
-  --color-secondary-container: #0a2014;
-  --color-on-secondary-container: #4ade80;
-  --color-secondary-fixed: #0a2014;
-  --color-secondary-fixed-dim: #0f3020;
-  --color-on-secondary-fixed: #4ade80;
-  --color-on-secondary-fixed-variant: #22ff88;
+  /* Secondary — mid gray */
+  --color-secondary: #464646;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #ededed;
+  --color-on-secondary-container: #424343;
+  --color-secondary-fixed: #ededed;
+  --color-secondary-fixed-dim: #d4d4d4;
+  --color-on-secondary-fixed: #424343;
+  --color-on-secondary-fixed-variant: #464646;
 
-  /* Tertiary — mossy mid green */
-  --color-tertiary: #16a34a;
-  --color-on-tertiary: #000000;
-  --color-tertiary-container: #0a2014;
-  --color-on-tertiary-container: #22ff88;
-  --color-tertiary-fixed: #0a2014;
-  --color-tertiary-fixed-dim: #0f3020;
-  --color-on-tertiary-fixed: #22ff88;
-  --color-on-tertiary-fixed-variant: #4ade80;
+  /* Tertiary — same gray family */
+  --color-tertiary: #424343;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #ededed;
+  --color-on-tertiary-container: #424343;
+  --color-tertiary-fixed: #ededed;
+  --color-tertiary-fixed-dim: #d4d4d4;
+  --color-on-tertiary-fixed: #424343;
+  --color-on-tertiary-fixed-variant: #464646;
 
-  /* Error — the antenna LED */
-  --color-error: #ff3344;
-  --color-on-error: #000000;
-  --color-error-container: #3a0810;
-  --color-on-error-container: #ff8a95;
+  /* Error — restrained red */
+  --color-error: #c8201c;
+  --color-on-error: #ffffff;
+  --color-error-container: #fde2e2;
+  --color-on-error-container: #5e0a08;
 
-  /* Outline — dim green borders */
-  --color-outline: #16a34a;
-  --color-outline-variant: #0f3a1f;
+  /* Outline — grays */
+  --color-outline: #464646;
+  --color-outline-variant: #d4d4d4;
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 9999px;
+
+  /* Shadow scale */
+  --shadow-sm: 0 1px 2px 0 rgba(66,67,67,0.04);
+  --shadow-md: 0 4px 8px -2px rgba(66,67,67,0.06), 0 2px 4px -2px rgba(66,67,67,0.04);
+  --shadow-lg: 0 10px 24px -6px rgba(66,67,67,0.08), 0 4px 8px -2px rgba(66,67,67,0.04);
 
   /* Spacing (unchanged) */
   --spacing-unit: 4px;
@@ -118,11 +129,6 @@
   --text-label-caps--font-weight: 700;
 }
 
-/* Brutalist global reset: no rounded corners anywhere */
-* {
-  border-radius: 0 !important;
-}
-
 body {
   background: var(--color-background);
   color: var(--color-on-surface);
@@ -139,22 +145,50 @@ body {
   font-variation-settings: "FILL" 1;
 }
 
-/* Pager-LCD select arrow (green) */
+/* Green select arrow */
 .brutalist-select {
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2322ff88%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2307c04e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 8px top 50%;
   background-size: 10px auto;
 }
 
+/* Shared input focus style */
 .brutalist-input:focus {
   outline: none;
-  border-color: #22ff88;
-  box-shadow: inset 0 0 0 1px #22ff88;
+  border-color: #07c04e;
+  box-shadow: 0 0 0 2px rgba(7, 192, 78, 0.18);
 }
 
-/* Subtle LCD glow on primary text (faint, won't kill readability) */
-.text-primary {
-  text-shadow: 0 0 4px rgba(34, 255, 136, 0.25);
+/* Status dot helper — inline green dot for "live/open" status */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: #07c04e;
+  flex-shrink: 0;
+}
+.status-dot--gray {
+  background-color: #464646;
+}
+.status-dot--red {
+  background-color: #c8201c;
+}
+
+/* Modal fade-in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 200ms ease-out both;
 }
