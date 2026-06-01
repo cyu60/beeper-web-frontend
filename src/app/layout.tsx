@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { TopAppBar } from "@/components/top-app-bar";
@@ -20,6 +20,21 @@ export const metadata: Metadata = {
   title: "Beeper — Async Claude delegation",
   description:
     "Async, allowlisted, Claude-to-Claude task delegation between two humans.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "Beeper",
+    statusBarStyle: "default",
+  },
+  applicationName: "Beeper",
+  formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#07c04e",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
