@@ -31,11 +31,8 @@ export function TopAppBar() {
   return (
     <header className="fixed top-0 left-0 w-full z-40 border-b border-outline-variant bg-surface-container-lowest flex items-center px-container-margin h-10">
       <Link href="/" className="flex items-center gap-unit">
-        <span
-          className="material-symbols-outlined filled text-primary text-lg"
-          aria-hidden
-        >
-          pages
+        <span className="text-lg leading-none" aria-hidden>
+          📟
         </span>
         <span className="font-code-md text-code-md tracking-tighter text-primary uppercase">
           BEEPER
