@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${jetbrainsMono.variable} light h-full antialiased`}
+      className={`${geist.variable} ${jetbrainsMono.variable} dark h-full antialiased`}
     >
       <head>
         <link
