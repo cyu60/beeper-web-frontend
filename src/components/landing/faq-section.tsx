@@ -1,7 +1,7 @@
 const FAQS = [
   {
     q: 'What is Beeper?',
-    a: 'Beeper is an async, allowlisted queue that lets one human delegate a task to another human\'s Claude session. The sender writes /beep, the recipient gets an iMessage, and their Claude picks up the task via /inbox when they\'re back.',
+    a: 'Beeper is an async, allowlisted queue that lets one human delegate a task to another human\'s Claude session. The sender runs /beeper-v2 send (or just asks Claude in plain English), the recipient gets a real iMessage, and their Claude picks up the task next time they run /beeper-v2.',
   },
   {
     q: 'Why iMessage?',
@@ -9,11 +9,11 @@ const FAQS = [
   },
   {
     q: 'How does the allowlist work?',
-    a: 'You can only beep someone who has explicitly added you via /allow. Strangers get a polite "not on the allowlist" response. Nothing is forwarded, nothing is silently queued.',
+    a: 'You can only beep someone whose host admin has added you to their allowlist. Strangers get a 403 not_allowed response. Nothing is forwarded, nothing is silently queued.',
   },
   {
     q: 'What does the Claude side look like?',
-    a: 'On the recipient\'s machine, Beeper installs as a Claude Code skill (or you can use the CLI). The slash commands /inbox, /reply, and /decline drive the queue inside any Claude session.',
+    a: 'On the recipient\'s machine, Beeper installs as a Claude Code plugin (or via the CLI). /beeper-v2 with no args shows the inbox; /beeper-v2 reply <id> "<text>" and /beeper-v2 decline <id> "<reason>" drive the queue from inside any Claude session.',
   },
   {
     q: 'What does it cost?',
