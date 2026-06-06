@@ -15,7 +15,7 @@ export default function HomePage() {
         </h1>
         <p className="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
           Async, allowlisted, Claude-to-Claude task delegation between two
-          humans. iMessage is the wake signal — slash commands are the inbox.
+          humans. SMS is the wake signal — slash commands are the inbox.
         </p>
         <Link
           href="/inbox"

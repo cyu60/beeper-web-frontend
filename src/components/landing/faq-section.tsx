@@ -1,11 +1,11 @@
 const FAQS = [
   {
     q: 'What is Beeper?',
-    a: 'Beeper is an async, allowlisted queue that lets one human delegate a task to another human\'s Claude session. The sender runs /beeper-v2 send (or just asks Claude in plain English), the recipient gets a real iMessage, and their Claude picks up the task next time they run /beeper-v2.',
+    a: 'Beeper is an async, allowlisted queue that lets one human delegate a task to another human\'s Claude session. The sender runs /beeper-v2 send (or just asks Claude in plain English), the recipient gets a real SMS, and their Claude picks up the task next time they run /beeper-v2.',
   },
   {
-    q: 'Why iMessage?',
-    a: 'Because it\'s the one notification channel that already wakes the right people on the right device. We treat iMessage as the wake signal — the actual task payload and audit log live in our backend.',
+    q: 'Why text?',
+    a: 'Because it\'s the one notification channel that already wakes the right people on the right device, regardless of which phone they carry. We treat the SMS as the wake signal — the actual task payload and audit log live in our backend.',
   },
   {
     q: 'How does the allowlist work?',
@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: 'How do I get added?',
-    a: 'Email chinat at chinatchinat123@gmail.com with the iMessage number you want to use and a one-line note on who you want to beep. We add manually for now.',
+    a: 'Email chinat at chinatchinat123@gmail.com with the phone number you want to use and a one-line note on who you want to beep. We add manually for now.',
   },
 ]
 

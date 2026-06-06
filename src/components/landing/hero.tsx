@@ -38,14 +38,14 @@ export function Hero({ onLogin }: { onLogin: () => void }) {
           className="text-[15px] leading-relaxed mb-9 max-w-[460px]"
           style={{ color: '#b5b5b5' }}
         >
-          Beeper queues a task in their iMessage so their Claude picks it up
-          when they&rsquo;re back. Wake-up signal in, slash-command inbox out.
+          Beeper queues a task and texts the recipient so their Claude picks
+          it up when they&rsquo;re back. Wake-up signal in, slash-command inbox out.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col items-stretch gap-3 w-[15rem]">
           <a
-            href="mailto:chinatchinat123@gmail.com?subject=Beeper%20allowlist%20request&body=Hi%20Chinat%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20Beeper%20allowlist.%0A%0AMy%20iMessage%3A%20%0AMy%20use%20case%3A%20"
+            href="mailto:chinatchinat123@gmail.com?subject=Beeper%20allowlist%20request&body=Hi%20Chinat%2C%0A%0AI%27d%20like%20to%20be%20added%20to%20the%20Beeper%20allowlist.%0A%0AMy%20phone%3A%20%0AMy%20use%20case%3A%20"
             className="cta-primary relative flex h-[3.25rem] items-center justify-between rounded-full pl-6 pr-1.5"
           >
             <span
