@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useIdentity } from "@/lib/identity";
 
 const NAV = [
@@ -13,19 +14,64 @@ const NAV = [
 
 function IdentityBadge() {
   const [me, setMe, loaded] = useIdentity();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  // close on outside click
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [open]);
+
   if (!loaded || !me) return null;
+
   return (
-    <button
-      onClick={() => {
-        if (confirm("Switch identity?")) setMe(null);
-      }}
-      className="ml-4 flex items-center gap-1.5 font-label-caps text-label-caps text-on-surface-variant border border-outline-variant px-3 py-1 rounded-full hover:bg-surface-container transition-colors duration-150 ease-out"
-      title="Click to switch identity"
-      style={{ boxShadow: "var(--shadow-sm)" }}
-    >
-      <span className="status-dot" aria-hidden />
-      ME: {me.toUpperCase()}
-    </button>
+    <div ref={ref} className="ml-4 relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-1.5 font-label-caps text-label-caps text-on-surface-variant border border-outline-variant px-3 py-1 rounded-full hover:bg-surface-container transition-colors duration-150 ease-out"
+        title="Account"
+        style={{ boxShadow: "var(--shadow-sm)" }}
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        <span className="status-dot" aria-hidden />
+        ME: {me.toUpperCase()}
+        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden className="opacity-60">
+          <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 mt-2 w-44 bg-surface-container-lowest border border-outline-variant rounded-md py-1 z-50"
+          style={{ boxShadow: "var(--shadow-md)" }}
+        >
+          <div className="px-3 py-2 border-b border-outline-variant">
+            <div className="font-label-caps text-label-caps text-on-surface-variant">
+              Signed in as
+            </div>
+            <div className="font-data-value text-data-value text-on-surface mt-0.5">
+              {me}
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              setMe(null);
+              setOpen(false);
+            }}
+            role="menuitem"
+            className="w-full text-left px-3 py-2 font-label-caps text-label-caps text-error hover:bg-surface-container transition-colors duration-150 ease-out"
+          >
+            SIGN OUT
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 
