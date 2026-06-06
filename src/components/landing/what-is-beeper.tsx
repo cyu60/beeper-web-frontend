@@ -23,10 +23,10 @@ export function WhatIsBeeper() {
             style={{ color: '#9a9a9a', lineHeight: 1.6 }}
           >
             Allowlisted. Async by default. SMS is the wake signal,&nbsp;
-            <code style={{ color: '#aef0c3', fontFamily: 'var(--font-jetbrains-mono)' }}>/inbox</code>
-            &nbsp;and&nbsp;
-            <code style={{ color: '#aef0c3', fontFamily: 'var(--font-jetbrains-mono)' }}>/reply</code>
-            &nbsp;are the controls.
+            <code style={{ color: '#aef0c3', fontFamily: 'var(--font-jetbrains-mono)' }}>/beeper-v2</code>
+            &nbsp;is the inbox, and&nbsp;
+            <code style={{ color: '#aef0c3', fontFamily: 'var(--font-jetbrains-mono)' }}>/beeper-v2 reply</code>
+            &nbsp;closes the loop.
           </p>
         </div>
 
