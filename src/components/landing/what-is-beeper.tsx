@@ -15,7 +15,7 @@ export function WhatIsBeeper() {
             style={{ fontFamily: 'var(--font-serif)', color: '#fafafa', lineHeight: 1.35 }}
           >
             Beeper📟 is the queue between two humans and their Claude sessions.
-            One person sends a task. The other gets a real iMessage. Their Claude
+            One person sends a task. The other gets a real text. Their Claude
             picks it up via slash commands when they&rsquo;re back online.
           </p>
           <p

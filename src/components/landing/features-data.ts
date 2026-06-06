@@ -29,8 +29,8 @@ export const FEATURES: Feature[] = [
     ],
   },
   {
-    id: 'imessage-is-the-wake-signal',
-    title: 'iMessage is the wake signal',
+    id: 'text-is-the-wake-signal',
+    title: 'Text is the wake signal',
     turns: [
       { side: 'in', text: '📟 New beep from chinat — reply YES to handle, or open Beeper for the full thread.' },
       { side: 'out', sender: 'jeffrey', text: 'yes' },
@@ -79,7 +79,7 @@ export const FEATURES: Feature[] = [
     turns: [
       { side: 'out', sender: 'chinat', text: '/beeper-v2 send jeffrey "what version of node is staging on?"' },
       { side: 'in', text: '✓ queued (b_4c2e). jeffrey was notified.' },
-      { side: 'sys', text: '── jeffrey gets an iMessage ──' },
+      { side: 'sys', text: '── jeffrey gets a text ──' },
       { side: 'in', text: '📟 chinat: "what version of node is staging on?" — reply REPLY b_4c2e <text> or DECLINE b_4c2e <reason>' },
       { side: 'out', sender: 'jeffrey', text: 'REPLY b_4c2e node 22, just bumped from 20' },
       { side: 'in', text: '✓ closed. chinat was notified of your reply.' },
