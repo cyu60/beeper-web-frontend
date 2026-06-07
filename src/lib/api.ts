@@ -20,11 +20,19 @@ export type Beep = {
 }
 
 export type User = { id: string; display_name: string }
+export type Me = {
+  user_id: string
+  display_name: string
+  first_name: string | null
+  last_name: string | null
+  is_admin: boolean
+}
 
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, {
     ...init,
     headers: { 'content-type': 'application/json', ...(init?.headers ?? {}) },
+    credentials: 'include',
     cache: 'no-store',
   })
   const text = await res.text()
@@ -40,6 +48,18 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  me: () => req<Me>('/api/auth/me'),
+
+  requestCode: (phone: string) =>
+    req<{ ok: true; request_id: string }>(
+      '/api/auth/request', { method: 'POST', body: JSON.stringify({ phone }) },
+    ),
+
+  verifyCode: (phone: string, code: string) =>
+    req<{ ok: true; user_id: string }>(
+      '/api/auth/verify', { method: 'POST', body: JSON.stringify({ phone, code }) },
+    ),
+
   listUsers: () => req<{ users: User[] }>('/api/users').then(r => r.users),
 
   inbox: (me: string) =>

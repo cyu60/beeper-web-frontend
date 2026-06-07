@@ -1,16 +1,39 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { api } from '@/lib/api'
 
 const KEY = 'beeper_user'
 
+/**
+ * Identity is whatever /api/auth/me returns. The HttpOnly cookie is the source
+ * of truth — localStorage just caches the user_id so the UI can render
+ * optimistically while /api/auth/me is in flight.
+ *
+ * Returns `[me, setMe, loaded]` where `setMe(null)` clears the cache (used by
+ * "switch identity" in the header — the cookie is cleared by hitting /login
+ * which triggers a fresh verify flow).
+ */
 export function useIdentity(): [string | null, (id: string | null) => void, boolean] {
   const [me, setMe] = useState<string | null>(null)
   const [loaded, setLoaded] = useState(false)
+
   useEffect(() => {
-    setMe(typeof window !== 'undefined' ? localStorage.getItem(KEY) : null)
-    setLoaded(true)
+    const cached = typeof window !== 'undefined' ? localStorage.getItem(KEY) : null
+    if (cached) setMe(cached)
+
+    api.me()
+      .then(m => {
+        setMe(m.user_id)
+        if (typeof window !== 'undefined') localStorage.setItem(KEY, m.user_id)
+      })
+      .catch(() => {
+        setMe(null)
+        if (typeof window !== 'undefined') localStorage.removeItem(KEY)
+      })
+      .finally(() => setLoaded(true))
   }, [])
+
   const update = (id: string | null) => {
     if (typeof window !== 'undefined') {
       if (id) localStorage.setItem(KEY, id)
