@@ -26,7 +26,7 @@ describe('/admin/login page', () => {
   })
 
   test('redirects to /inbox when admin cookie is present', async () => {
-    vi.mocked(cookies).mockResolvedValue(fakeCookies({ beeper_admin_pwd: 'real-password' }) as never)
+    vi.mocked(cookies).mockResolvedValue(fakeCookies({ beeper_admin: 'real-password' }) as never)
     const { default: AdminLoginPage } = await import('@/app/admin/login/page')
     await expect(AdminLoginPage()).rejects.toThrow('REDIRECT:/inbox')
     expect(redirect).toHaveBeenCalledWith('/inbox')
