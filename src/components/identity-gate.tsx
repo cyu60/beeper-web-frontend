@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useIdentity } from '@/lib/identity'
 
-const PUBLIC_PATHS = new Set(['/login'])
-const PUBLIC_PREFIXES = ['/docs']
+const PUBLIC_PATHS = new Set(['/login', '/'])
+const PUBLIC_PREFIXES = ['/docs', '/admin']
 
 export function IdentityGate({ children }: { children: React.ReactNode }) {
   const [me, , loaded] = useIdentity()
