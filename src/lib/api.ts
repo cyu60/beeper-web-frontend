@@ -1,4 +1,10 @@
-const BASE = process.env.NEXT_PUBLIC_BEEPER_API_URL ?? 'https://beeper-v2-host.vercel.app'
+// Empty default → calls hit the same-origin proxy from next.config.ts
+// (`/api/:path*` → beeper-v2-host). Required because cross-origin set-cookie
+// is blocked by Safari ITP / Chrome third-party cookie restrictions even
+// with SameSite=None; Secure. Override available via the env var for any
+// client that genuinely needs cross-origin (e.g. a local dev pointing at a
+// remote host).
+const BASE = process.env.NEXT_PUBLIC_BEEPER_API_URL ?? ''
 
 export type Urgency = 'low' | 'normal' | 'high'
 export type BeepStatus = 'open' | 'closed' | 'declined'
