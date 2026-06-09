@@ -5,7 +5,7 @@ import { useIdentity } from '@/lib/identity'
 import { inboxRedirectFor } from '@/lib/landing-redirect'
 import { LandingPage } from '@/components/landing/landing-page'
 
-const PUBLIC_PATHS = new Set(['/login', '/'])
+const PUBLIC_PATHS = new Set(['/login', '/', '/privacy', '/terms'])
 const PUBLIC_PREFIXES = ['/docs', '/admin']
 
 export function IdentityGate({ children }: { children: React.ReactNode }) {

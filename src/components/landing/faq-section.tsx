@@ -103,6 +103,18 @@ export function FaqSection() {
               CLI on GitHub
             </a>
             <a
+              href="/privacy"
+              className="hover:text-white transition-colors"
+            >
+              Privacy
+            </a>
+            <a
+              href="/terms"
+              className="hover:text-white transition-colors"
+            >
+              Terms
+            </a>
+            <a
               href="mailto:chinatchinat123@gmail.com"
               className="hover:text-white transition-colors"
             >
